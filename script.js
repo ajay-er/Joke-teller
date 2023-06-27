@@ -106,7 +106,7 @@ const VoiceRSS = {
   },
 };
 
-function test() {
+/* function test() {
   VoiceRSS.speech({
     key: 'bab261a3aca040a48dfeec6fce93f186',
     src: 'Hello, world!',
@@ -120,3 +120,24 @@ function test() {
 }
 
 test();
+ */
+
+
+//Get jokes from joke API
+async function getJokes() {
+  let url = 'https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit'
+  try {
+    let result = await fetch(url);
+    let data = await result.json();
+    if (data.setup) {
+      joke = `${data.setup}... ${data.delivery}`;
+    } else {
+      joke = data.joke;
+    }
+    console.log(joke);
+  } catch (error) {
+    console.log("Oops!",error);
+  }
+}
+
+getJokes()
